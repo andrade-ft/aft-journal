@@ -1,17 +1,24 @@
 import {
 
 db,
+auth,
+provider,
+
+
 collection,
 addDoc,
 getDocs,
 doc,
 updateDoc,
-deleteDoc
+deleteDoc,
+
+
+signInWithPopup,
+onAuthStateChanged
 
 }
 
 from "./firebase.js";
-
 
 
 
@@ -33,6 +40,7 @@ const UPLOAD_PRESET =
 "aft_journal";
 
 let trades = [];
+let usuario = null;
 
 
 let modoActual =
@@ -2500,7 +2508,87 @@ a.click();
 
 }
 
+/* ============================
+   GOOGLE AUTH
+============================ */
 
+
+async function loginGoogle(){
+
+
+await signInWithPopup(
+
+auth,
+
+provider
+
+);
+
+
+}
+
+
+
+onAuthStateChanged(
+
+auth,
+
+(user)=>{
+
+
+if(user){
+
+
+usuario = user;
+
+
+console.log(
+
+"LOGIN UID:",
+
+user.uid
+
+);
+
+
+document.getElementById("loginScreen").style.display =
+"none";
+
+
+document.getElementById("appContent").style.display =
+"block";
+
+
+cargarFirebase();
+
+
+}else{
+
+
+usuario = null;
+
+
+document.getElementById("loginScreen").style.display =
+"flex";
+
+
+document.getElementById("appContent").style.display =
+"none";
+
+
+console.log(
+
+"SIN LOGIN"
+
+);
+
+
+}
+
+
+}
+
+);
 
 
 
@@ -2514,6 +2602,8 @@ a.click();
 
 
 window.abrirTrade = abrirTrade;
+
+window.loginGoogle = loginGoogle;
 
 window.cerrarTrade = cerrarTrade;
 

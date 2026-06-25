@@ -15,7 +15,17 @@ deleteDoc
 }
 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+import {
 
+getAuth,
+GoogleAuthProvider,
+signInWithPopup,
+signOut,
+onAuthStateChanged
+
+}
+
+from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
 
 
@@ -68,13 +78,16 @@ firebaseConfig
 
 
 
-const db = getFirestore(
+const db = 
+getFirestore(app);
 
-app
+const auth =
+getAuth(app);
 
-);
 
 
+const provider =
+new GoogleAuthProvider();
 
 
 
@@ -88,26 +101,21 @@ app
 
 export {
 
-
 db,
+auth,
+provider,
 
 
 collection,
-
-
 addDoc,
-
-
 getDocs,
-
-
 doc,
-
-
 updateDoc,
+deleteDoc,
 
 
-deleteDoc
-
+signInWithPopup,
+signOut,
+onAuthStateChanged
 
 };
