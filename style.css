@@ -1114,3 +1114,74 @@ transition:.2s;
 transform:scale(1.03);
 
 }
+
+/* ======================
+   PASTE IMAGE SYSTEM
+====================== */
+
+
+.paste-zone{
+
+margin-top:10px;
+
+padding:22px;
+
+border-radius:18px;
+
+border:2px dashed rgba(0,255,150,.35);
+
+background:rgba(255,255,255,.03);
+
+text-align:center;
+
+cursor:pointer;
+
+transition:.2s;
+
+}
+
+
+
+.paste-zone:hover{
+
+background:rgba(0,255,150,.07);
+
+border-color:#00ff88;
+
+}
+
+
+
+.paste-zone p{
+
+font-size:13px;
+
+color:#888;
+
+}
+
+
+
+.paste-zone input{
+
+margin-top:12px;
+
+}
+
+
+
+.preview-img img{
+
+width:100%;
+
+border-radius:16px;
+
+margin-top:15px;
+
+}
+
+#appContent{
+
+display:none;
+
+}

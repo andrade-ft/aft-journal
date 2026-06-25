@@ -15,6 +15,8 @@ deleteDoc
 }
 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
 import {
 
 getAuth,
@@ -26,7 +28,6 @@ onAuthStateChanged
 }
 
 from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
 
 
 
@@ -60,30 +61,21 @@ appId: "1:957294770056:web:824d9b6ec3147f1c92c3d"
 
 
 
-
-
-
-
 /* ============================
-   INIT FIREBASE
+   INIT
 ============================ */
 
 
-const app = initializeApp(
-
-firebaseConfig
-
-);
+const app =
+initializeApp(firebaseConfig);
 
 
-
-
-const db = 
+const db =
 getFirestore(app);
+
 
 const auth =
 getAuth(app);
-
 
 
 const provider =
@@ -92,10 +84,8 @@ new GoogleAuthProvider();
 
 
 
-
-
 /* ============================
-   EXPORTS
+   EXPORT
 ============================ */
 
 

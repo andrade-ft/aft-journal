@@ -716,6 +716,8 @@ step="0.1">
 
 
 
+<!-- ================= IMAGES ================= -->
+
 
 <h3>ENTRY</h3>
 
@@ -723,11 +725,22 @@ step="0.1">
 
 <label>HTF</label>
 
+<div 
+class="paste-zone"
+data-input="entryHTF"
+data-preview="previewHTF">
+
+<p>📋 CTRL + V imagen o seleccionar archivo</p>
+
+
 <input 
 id="entryHTF"
 type="file"
 accept="image/*"
 onchange="previewIndividual(this,'previewHTF')">
+
+
+</div>
 
 
 <div 
@@ -739,14 +752,25 @@ class="preview-img">
 
 
 
-
 <label>LTF</label>
+
+
+<div 
+class="paste-zone"
+data-input="entryLTF"
+data-preview="previewLTF">
+
+<p>📋 CTRL + V imagen o seleccionar archivo</p>
+
 
 <input 
 id="entryLTF"
 type="file"
 accept="image/*"
 onchange="previewIndividual(this,'previewLTF')">
+
+
+</div>
 
 
 <div 
@@ -759,7 +783,19 @@ class="preview-img">
 
 
 
+
+
 <label>AUX</label>
+
+
+<div 
+class="paste-zone"
+data-input="entryAux"
+data-preview="previewAux">
+
+
+<p>📋 CTRL + V imagen o seleccionar archivo</p>
+
 
 
 <input 
@@ -767,6 +803,9 @@ id="entryAux"
 type="file"
 accept="image/*"
 onchange="previewIndividual(this,'previewAux')">
+
+
+</div>
 
 
 <div 
@@ -786,11 +825,24 @@ class="preview-img">
 
 
 
+<div 
+class="paste-zone"
+data-input="exitImg"
+data-preview="previewExit">
+
+
+<p>📋 CTRL + V imagen o seleccionar archivo</p>
+
+
+
 <input 
 id="exitImg"
 type="file"
 accept="image/*"
 onchange="previewIndividual(this,'previewExit')">
+
+
+</div>
 
 
 <div 
@@ -805,7 +857,20 @@ class="preview-img">
 
 
 
+
+
 <h3>POST TRADE</h3>
+
+
+
+<div 
+class="paste-zone"
+data-input="postImg"
+data-preview="previewPost">
+
+
+<p>📋 CTRL + V imagen o seleccionar archivo</p>
+
 
 
 <input 
@@ -815,12 +880,14 @@ accept="image/*"
 onchange="previewIndividual(this,'previewPost')">
 
 
+</div>
+
+
+
 <div 
 id="previewPost"
 class="preview-img">
 </div>
-
-
 
 
 

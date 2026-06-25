@@ -80,8 +80,13 @@ new Date();
 
 let editando = null;
 
+
 let tradeReview = null;
 
+
+/* BLOQUEO DOBLE SAVE */
+
+let guardandoTrade = false;
 
 
 
@@ -107,14 +112,15 @@ return;
 }
 
 
-let datos =
+trades = [];
+
+
+let snapshot =
 await getDocs(
+
 collection(db,"trades")
+
 );
-
-
-
-
 
 
 
@@ -123,33 +129,27 @@ snapshot.forEach(
 docu=>{
 
 
-
 trades.push({
 
 
 firebaseID:
-
 docu.id,
-
 
 
 ...docu.data()
 
 
-
 });
 
 
-
 }
+
 
 );
 
 
 
-
 actualizar();
-
 
 
 }
@@ -816,10 +816,48 @@ onclick="abrirImagen(this.src)"
    GUARDAR TRADE
 ============================ */
 
-
 async function guardarTrade(){
 
 
+if(guardandoTrade){
+
+return;
+
+}
+if(
+
+rr.value === ""
+
+){
+
+
+alert(
+
+"Ingresa el resultado en R antes de guardar"
+
+);
+
+
+return;
+
+
+}
+
+guardandoTrade = true;
+
+
+let botonGuardar =
+document.querySelector(".save");
+
+
+botonGuardar.disabled = true;
+
+
+botonGuardar.innerText =
+"GUARDANDO...";
+
+
+try{
 
 let viejo =
 
@@ -849,8 +887,7 @@ id:
 
 viejo?.id ||
 
-Date.now().toString(),
-
+crypto.randomUUID(),
 
 
 
@@ -1108,19 +1145,45 @@ trade
 
 
 
-
-
-
-
-
 modal.style.display=
 
 "none";
 
 
 
+}catch(error){
+
+
+console.error(
+"ERROR AL GUARDAR:",
+error
+);
+
+
+alert(
+"Falló al guardar, mira consola"
+);
+
+
+}
+finally{
+
+
+guardandoTrade = false;
+
+
+botonGuardar.disabled =
+false;
+
+
+botonGuardar.innerText =
+"SAVE TRADE";
+
+
 }
 
+
+}
 
 
 
@@ -2004,16 +2067,17 @@ function pintarTabla(data){
 listaTrades.innerHTML="";
 
 
-
-
 data
 
 .slice()
 
-.reverse()
+.sort(
+
+(a,b)=> new Date(b.fecha) - new Date(a.fecha)
+
+)
 
 .forEach(t=>{
-
 
 
 let i = trades.indexOf(t);
@@ -2593,7 +2657,112 @@ console.log(
 );
 
 
+/* ============================
+   PEGAR IMÁGENES CTRL + V
+============================ */
 
+
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+
+document.querySelectorAll(".paste-zone")
+.forEach(zone=>{
+
+
+zone.addEventListener(
+"paste",
+(e)=>{
+
+
+e.preventDefault();
+
+
+let imagen =
+Array.from(e.clipboardData.items)
+.find(
+item => item.type.includes("image")
+);
+
+
+
+if(!imagen){
+
+return;
+
+}
+
+
+
+let archivo =
+imagen.getAsFile();
+
+
+
+
+let input =
+document.getElementById(
+
+zone.dataset.input
+
+);
+
+
+
+
+let transferencia =
+new DataTransfer();
+
+
+
+
+transferencia.items.add(
+
+archivo
+
+);
+
+
+
+input.files =
+transferencia.files;
+
+
+
+
+
+// activar tu preview viejo
+
+previewIndividual(
+
+input,
+
+zone.dataset.preview
+
+);
+
+
+
+console.log(
+
+"IMAGEN PEGADA:",
+
+zone.dataset.input
+
+);
+
+
+
+});
+
+
+});
+
+
+}
+
+);
 
 
 
@@ -2652,9 +2821,8 @@ modoActual
 );
 
 
+cambiarModo(
 
-cargarFirebase();
+modoActual
 
-
-render();
-actualizarStats();
+);
