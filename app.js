@@ -2652,3 +2652,7 @@ modoActual
 
 
 cargarFirebase();
+
+
+render();
+actualizarStats();
