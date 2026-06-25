@@ -98,19 +98,21 @@ let tradeReview = null;
 async function cargarFirebase(){
 
 
+if(!usuario){
 
-trades=[];
+console.log("BLOQUEADO - SIN LOGIN");
+
+return;
+
+}
 
 
-
-
-const snapshot =
-
+let datos =
 await getDocs(
-
 collection(db,"trades")
-
 );
+
+
 
 
 
