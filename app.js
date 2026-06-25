@@ -99,7 +99,6 @@ let guardandoTrade = false;
    FIREBASE LOAD
 ============================ */
 
-
 async function cargarFirebase(){
 
 
@@ -112,10 +111,13 @@ return;
 }
 
 
+
 trades = [];
 
 
+
 let snapshot =
+
 await getDocs(
 
 collection(db,"trades")
@@ -129,27 +131,32 @@ snapshot.forEach(
 docu=>{
 
 
+
 trades.push({
 
 
 firebaseID:
+
 docu.id,
+
 
 
 ...docu.data()
 
 
+
 });
 
 
-}
 
+}
 
 );
 
 
 
 actualizar();
+
 
 
 }
@@ -2808,17 +2815,9 @@ window.borrarTrade = borrarTrade;
 
 
 
-
 /* ============================
    START APP
 ============================ */
-
-
-cambiarModo(
-
-modoActual
-
-);
 
 
 cambiarModo(
